@@ -1,0 +1,8 @@
+.correctAnswer{
+    background-color: rgb(65, 255, 65);
+}
+
+.incorrectAnswer
+{
+    background: rgb(255, 52, 52);
+}
