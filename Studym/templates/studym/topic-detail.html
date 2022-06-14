@@ -1,0 +1,30 @@
+{% extends 'studym/base.html' %}
+
+{% block body %}
+
+<section class="flex flex-col p-2 text-white justify-center items-center min-h-screen gap-2">
+    {% for topic_l in topic.getTextList %}
+    <div class="">
+        <p class="toggle-dropdown p-2 text-center w-full md:w-auto border-2 rounded-lg">{{topic_l.0}}</p>
+        <div class="dropdown text-center">
+
+            <ul>
+                {% for ans in topic_l|slice:"1:" %}
+                <li>{{ans}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<script>
+    $('.dropdown').hide();
+    $('.toggle-dropdown').on('click', function(){
+        $('.dropdown')
+        $(this).parent().children('.dropdown').toggle(300)
+    })
+
+</script>
+
+{% endblock body %}

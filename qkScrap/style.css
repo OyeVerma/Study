@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+*
+{
+    margin: 0;
+    background: #353839;
+    font-family: 'Poppins', sans-serif;
+}
+
+.topicForm
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.inputBox
+{
+    position: relative;
+
+}
+
+.inputBox .input
+{
+    padding: 15px;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+}
+
+.inputBox label
+{
+    position: absolute;
+    text-transform: uppercase;
+    left: 15px;
+    top: 15px;
+    /* padding: 15px; */
+    transition: all 0.3s;
+    color: white;
+    letter-spacing: 3px;
+    pointer-events: none;
+}
+
+.inputBox .input:focus ~ label
+{
+    transform: translatex(-5px) translatey(-25px);
+    background: inherit;
+    padding: 0 10px;
+    border: 1px solid orange;
+    /* border-radius: 5px; */
+    border-top: 0;
+    border-bottom: 0;
+    color: orange;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    border-width: 2px;
+}
+
+.label-active
+{
+    transform: translatex(-5px) translatey(-25px);
+    background: inherit;
+    padding: 0 10px;
+    border: 1px solid orange;
+    /* border-radius: 5px; */
+    border-top: 0;
+    border-bottom: 0;
+    color: inherit;
+    background: orange;
+    letter-spacing: 2px;
+    font-weight: bolder;
+    border-width: 2px;
+}
+
+.inputBox .input-active
+{
+    border-color: orange;
+    border-width: 2px;
+    color: orange;
+}
+
+.inputBox .input:focus
+{
+    border-color: orange;
+    color: orange;
+    border-width: 2px;
+}
+
+.topicForm button
+{
+    padding: 15px;
+    font-weight: bolder;
+    outline: none;
+    border: 1px solid orange;
+    border-radius: 10px;
+    cursor: pointer;
+    color: orange;
+    transition: all 0.5s;
+}
+
+.topicForm button:hover
+{
+    transform: scale(1.1);
+    color: inherit;
+    background: orange;
+}

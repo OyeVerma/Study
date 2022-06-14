@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, resolve_url
 import random
 # Create your views here.
 from django.views import generic
@@ -22,4 +22,23 @@ class CurrentAffairsQuizView(View):
             'ques_list':ql,
             'page':pgt.get_page(request.GET.get('page', 0))
 
+        })
+
+from .forms import *
+class TopicCreateView(generic.CreateView):
+    form_class = TopicForm
+    template_name = "studym/topic-create.html"
+    # success_url = resolve_url('topic-detail',)
+
+    # def post(self, request):
+    #     tf = TopicForm(request.POST)
+
+
+class TopicDetailView(View):
+
+    def get(self, request, title):
+        topic = Topic.objects.get(title=slugify(title.lower()))
+        return render(request, 'studym/topic-detail.html', {
+            'title':title.replace('-',  ''),
+            'topic':topic
         })
