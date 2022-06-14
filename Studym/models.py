@@ -18,23 +18,17 @@ class fromCSV(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"pk": self.pk})
     
-from .utilities import topicTextDecorator
+    
 class Topic(models.Model):
     title = models.CharField(unique=True, max_length=50)
     text = models.TextField()
-
+    slug = models.SlugField(editable=False)
     def __str__(self):
         return slugify(self.title)
 
-    def slug(self):
-        return slugify(self.title)
-
     def save(self, *args, **kwargs):
-        self.title = self.title.lower()
+        self.slug = slugify(self.title)
         super(Topic, self).save(*args, **kwargs)
-
-    def getText(self):
-        return topicTextDecorator(self.text)
 
     def getTextList(self):
         d = []

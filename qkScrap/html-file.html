@@ -1,29 +1,61 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="https://kit.fontawesome.com/c0f5666984.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <link rel="stylesheet" href="style.css">
+    <title>New Topic</title>
 </head>
 <body>
-    <ul>
-        <li>Fruit
-          <ul>
-            <li>Bananas</li>
-            <li>Apples
-              <ul>
-                <li>Green</li>
-                <li>Red</li>
-              </ul>
-            </li>
-            <li>Pears</li>
-          </ul>
-        </li>
-        <li>Vegetables</li>
-        <li>Meat</li>
-      </ul>
+    
+
+<section class="grid md:grid-cols-3 bg-black">
+    <div></div>
+    <form action="" method="post" class="topicForm" novalidate> <input type="hidden" name="csrfmiddlewaretoken" value="83VPr8EGI54nB497AEuAaSh0TUFaHUSGTYTjE23XozW4rM3WxNyAkM1rcu3OmcSo">
+        
+        <div class="inputBox">
+            <input type="text" name="title" value="this" autocomplete="new-password" maxlength="50" id="Title" class="input w-auto" required>
+            <label for="Title">Title</label>
+            <small class="error"><ul class="errorlist"><li>Topic with this Title already exists.</li></ul></small>
+        </div>
+        
+        <div class="inputBox">
+            <textarea name="text" cols="30" rows="10" style="resize:none;" autocomplete="new-password" id="Text" class="input w-auto" required>
+</textarea>
+            <label for="Text">Text</label>
+            <small class="error"><ul class="errorlist"><li>This field is required.</li></ul></small>
+        </div>
+        
+        <button type="submit">SUBMIT</button>
+    </form>
+    <div></div>
+</section>
+
+<script>
+    $('.input').on('change', function(){
+    let value = $(this).val();
+    if (value.length) {
+        $(this).addClass('input-active');
+        $(this).parent().children('label').addClass('label-active');
+    } else {
+        $(this).removeClass('input-active');
+        $(this).parent().children('label').removeClass('label-active');
+
+    }
+
+    $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            alert('The file "' + fileName +  '" has been selected.');
+        });
+})
+</script>
+
+
 </body>
 </html>

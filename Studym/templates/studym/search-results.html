@@ -1,0 +1,8 @@
+<div class="flex flex-col rounded-lg gap-2 bottom-0 bg-slate-600  text-wrap overflow-none overflow-y-scroll max-h-64 border-2 border-[orange]">
+    {% for result in results %}
+<a href="{% url 'topic-detail' result.slug %}" class="p-2 text-center text-white">
+    {{result.title}}
+</a>
+{% if forloop.counter < results.count %} <hr class="border-[orange]"> {% endif %}
+{% endfor %}
+</div>

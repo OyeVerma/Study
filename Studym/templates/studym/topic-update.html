@@ -1,0 +1,33 @@
+{% extends 'studym/base.html' %}
+{% load widget_tweaks %}
+{% block body %}
+
+<section class="grid md:grid-cols-3 bg-black">
+    <div></div>
+    <form action="{{toPostUrl}}" method="post" class="topicForm"> {% csrf_token %}
+        {% for field in form %}
+        <div class="inputBox">
+            {% render_field field class="input w-auto input-active" id=field.label %}
+            <label for="{{field.label}}" class="label-active">{{field.label}}</label>
+        </div>
+        {% endfor %}
+        <button type="submit">SUBMIT</button>
+    </form>
+    <div></div>
+</section>
+
+<script>
+    $('.input').on('change', function(){
+    let value = $(this).val();
+    if (value.length) {
+        $(this).addClass('input-active');
+        $(this).parent().children('label').addClass('label-active');
+    } else {
+        $(this).removeClass('input-active');
+        $(this).parent().children('label').removeClass('label-active');
+
+    }
+})
+</script>
+
+{% endblock body %}

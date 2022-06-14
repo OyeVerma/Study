@@ -9,5 +9,8 @@ class TopicForm(forms.ModelForm):
 
         widgets = {
             'title':forms.TextInput(attrs={'autocomplete':'new-password'}),
-            'text':forms.Textarea(attrs={'cols':30, 'autocomplete':'new-password'}),
+            'text':forms.Textarea(attrs={'style':'resize:none;', 'cols':30, 'autocomplete':'new-password'}),
         }
+
+class TopicFileForm(forms.Form):
+    file = forms.FileField(widget=forms.ClearableFileInput())

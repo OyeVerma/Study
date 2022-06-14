@@ -2,16 +2,22 @@
 {% load widget_tweaks %}
 {% block body %}
 
-<section class="grid md:grid-cols-3">
+<section class="grid md:grid-cols-3 bg-black">
     <div></div>
-    <form action="" method="post" class="topicForm"> {% csrf_token %}
-        {% for field in form %}
+    <form action="" method="post" class="topicForm" novalidate> {% csrf_token %}
+        {% url 'topic-check-title' as checkTitleUrl %}
         <div class="inputBox">
-            {% render_field field class="input w-auto" id=field.label %}
-            <label for="{{field.label}}">{{field.label}}</label>
+            {% render_field form.title class="input w-auto" id=form.title.label hx-get=checkTitleUrl hx-trigger="keyup changed delay:500ms" hx-target=".titleError" %}
+            <label for="{{form.title.label}}">{{form.title.label}}</label>
+            <small class="error titleError m-1"></small>
         </div>
-        {% endfor %}
-        <button type="submit">SUBMIT</button>
+        {% url 'topic-check-text' as checkTextUrl %}
+        <div class="inputBox">
+            {% render_field form.text class="input w-auto" id=form.text.label  hx-get=checkTextUrl hx-trigger="keyup changed delay:500ms" hx-target=".textError" %}
+            <label for="{{form.text.label}}">{{form.text.label}}</label>
+            <small class="error textError m-2">{{form.text.errors}}</small>
+        </div>
+        <button type="submit" id="button">SUBMIT</button>
     </form>
     <div></div>
 </section>
@@ -26,7 +32,12 @@
         $(this).removeClass('input-active');
         $(this).parent().children('label').removeClass('label-active');
 
-    }
+    };
+    
+    $('input[type="file"]').change(function(e){
+            var fileName = e.target.files[0].name;
+            alert('The file "' + fileName +  '" has been selected.');
+        });
 })
 </script>
 

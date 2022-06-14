@@ -3,7 +3,7 @@
 *
 {
     margin: 0;
-    background: #353839;
+    /* background: #353839; */
     font-family: 'Poppins', sans-serif;
 }
 
@@ -14,7 +14,7 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .inputBox
@@ -23,13 +23,40 @@
 
 }
 
+.inputFileBox label
+{
+    padding: 15px;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
 .inputBox .input
 {
     padding: 15px;
     outline: none;
     border: 1px solid white;
     border-radius: 10px;
-    color: white;
+    background-color: transparent;
+}
+
+.inputBox .error
+{
+    text-align: center;
+    color: orange;
+    transform: translateY(-5px);
+    font-weight: bolder;
+
+}
+
+.inputBox textarea::-webkit-scrollbar
+{
+    width: 0;
 }
 
 .inputBox label
@@ -48,10 +75,9 @@
 .inputBox .input:focus ~ label
 {
     transform: translatex(-5px) translatey(-25px);
-    background: inherit;
+    background-color: black;
     padding: 0 10px;
     border: 1px solid orange;
-    /* border-radius: 5px; */
     border-top: 0;
     border-bottom: 0;
     color: orange;
@@ -60,7 +86,7 @@
     border-width: 2px;
 }
 
-.label-active
+.inputBox .label-active
 {
     transform: translatex(-5px) translatey(-25px);
     background: inherit;
@@ -69,7 +95,7 @@
     /* border-radius: 5px; */
     border-top: 0;
     border-bottom: 0;
-    color: inherit;
+    color: black;
     background: orange;
     letter-spacing: 2px;
     font-weight: bolder;

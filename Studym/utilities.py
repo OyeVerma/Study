@@ -12,28 +12,17 @@ import csv
 #         for r in cont:
 #             print(r)
 
-def topicTextDecorator(text):
-    lines = text.split('\n')
-    result = ''
+import random
+class TopicAPI:
+    def __init__(self, text):
+        self.text = text
+    
+    def title(self, random_title = 'Enter Title Here - '):
+        if self.text[0] == '*':
+            return self.text[1:self.text.find('\n')]
+        else:
+            random_title += str(random.randint(100000, 999999))
+            return random_title
 
-    if lines[0][0] == '*':
-        result += f'<h1>{lines[0][1:].title()}</h1>'
-
-    for line in lines:
-        if line == '':
-            continue
-        if line[0:2] == '--':
-            result += f'<li>{line[2:].title()}</li>'
-        elif line[0] == '-':
-            result += f'<li>{line[1:].title()}</li>'
-
-    return(result)
-
-h = '''*This is Hedding
--this is first li
---this is under first li
--this is second li
--this is third li
---this is under third li'''
-
-topicTextDecorator(h)
+    def text(self):
+        return self.text
