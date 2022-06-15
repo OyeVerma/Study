@@ -5,9 +5,10 @@ urlpatterns = [
     path('', CurrentAffairsQuizView.as_view(), name='list'),
     path('topic/', TopicIndexView.as_view(), name='topic-index'),
     path('topic/new/', TopicCreateView.as_view(), name='topic-create'),
-    path('topic/update/<slug>/', TopicUpdateView.as_view(), name='topic-update'),
+    path('topic/<slug>/update/', TopicUpdateView.as_view(), name='topic-update'),
     path('topic-by-file/new/', TopicFileCreateView.as_view(), name='topic-file-create'),
-    path('topic/delete/<slug>/', topicDelete, name='topic-delete'),
+    path('topic/<slug>/delete/', topicDelete, name='topic-delete'),
+    path('topic/<slug>/quiz/', TopicQuizView.as_view(), name='topic-quiz'),
     path('topic/<slug>/', TopicDetailView.as_view(), name='topic-detail'),
 ]
 

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, resolve_url, redirect
-import random
+from .utilities import TopicAPI
 # Create your views here.
 from django.views import generic
 
@@ -24,11 +24,10 @@ class CurrentAffairsQuizView(View):
     def get(self, request):
         pgt = Paginator(ql, 1)
         p = pgt.get_page(request.GET.get('page', 0))
-        # print(p.keys)
         return render(request, 'studym/current-affairs-quiz.html', {
             'title':'Current Affairs Quiz',
             'ques_list':ql,
-            'page':pgt.get_page(request.GET.get('page', 0))
+            'page':p
 
         })
 
@@ -80,6 +79,11 @@ class TopicDetailView(View):
 
     def get(self, request, slug):
         topic = Topic.objects.get(slug=slug)
+        t = TopicAPI()
+        q, o, a = t.quiz(topic)
+        print('quest', q)
+        print('options', o)
+        print('answer', a)
         return render(request, 'studym/topic-detail.html', {
             'title':topic.title,
             'topic':topic
@@ -92,6 +96,17 @@ class TopicFileCreateView(View):
             'form':TopicFileForm
         })
 
+class TopicQuizView(View):
+    def get(self, request, slug):
+        topic = Topic.objects.get(slug=slug)
+        topicquiz = TopicAPI(topic_obj=topic).quiz()
+        return render(request, 'studym/topic-quiz.html', {
+            'title':topic.title,
+            'topic':topic,
+            'topicquiz':topicquiz
+        })
+
+
 def checkTitle(request):
     title = request.GET.get('title')
     topic = Topic.objects.filter(slug=slugify(title))
@@ -102,14 +117,9 @@ def checkTitle(request):
 
 def topicSearch(request):
     q = request.GET.get('q')
-    print('q >', q)
     topics = Topic.objects.filter(title__icontains=q)
-    print(topics)
-    print('not len prn zero time')
     if not len(topics):
-        print('not len prn')
         return HttpResponse('No matching topics'.title())
-    print('not len prn second gti')
     return HttpResponse(render_to_string('studym/search-results.html', {
         'results':topics
     }))

@@ -32,6 +32,7 @@ class Topic(models.Model):
 
     def getTextList(self):
         d = []
+        heads = []
         lines = self.text.split('\n')
         cwlist = []
         for line in lines:
@@ -41,7 +42,9 @@ class Topic(models.Model):
                 elif line[0] == '-':
                     if len(cwlist) != 0:
                         d.append(cwlist)
+                        heads.append(line[1:])
                         cwlist = []
                     cwlist.append(line[1:])
+        heads.append(line[1:])
         d.append(cwlist)
-        return d
+        return d, heads
